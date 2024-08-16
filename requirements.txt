@@ -1,4 +1,6 @@
-
-dash==2.6.0
+dash
 pandas
+plotly
+requests
+flask-caching
 gunicorn
