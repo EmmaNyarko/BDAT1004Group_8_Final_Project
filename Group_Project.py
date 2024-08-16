@@ -14,12 +14,12 @@ server = app.server
 # Initialize caching
 cache = Cache(app.server, config={
     'CACHE_TYPE': 'simple',
-    'CACHE_DEFAULT_TIMEOUT': 3600  # Cache for 1 hour
+    'CACHE_DEFAULT_TIMEOUT': 86400  # Cache for 24 hours
 })
 
 # Constants
 TOP_N_COUNTRIES = 10
-UPDATE_INTERVAL = 86400000 * 7  # 7 days in milliseconds
+UPDATE_INTERVAL = 86400000  # 24 hours in milliseconds
 
 app.layout = html.Div([
     html.H1('COVID-19 Vaccine Coverage by Country', style={'textAlign': 'center'}),
@@ -33,7 +33,7 @@ app.layout = html.Div([
 ], className='container')
 
 
-@cache.memoize()
+@cache.memoize(timeout=86400)  # Cache for 24 hours
 def fetch_and_process_data():
     try:
         r = requests.get("https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=1")
