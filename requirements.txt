@@ -1,7 +1,4 @@
 
 dash==2.6.0
-Flask
 pandas
 gunicorn
-plotly
-requests
